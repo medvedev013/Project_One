@@ -12,13 +12,16 @@ def filter_by_state(operations: list, state: str = "EXECUTED") -> list:
     for operation in operations:
         if operation.get("state") == state:
             filter.append(operation)
-    return filter
+    if filter != []:
+        return filter
+    else:
+        raise KeyError("Словарей для такого статуса нет")
 
 
 print(filter_by_state(operations, state="CANCELED"))
 
 
-def sort_by_date(operations: list, descending: bool =True) -> list:
+def sort_by_date(operations: list, descending: bool = True) -> list:
     """Возвращает новый список, отсортированный по дате."""
     return sorted(operations, key=lambda operation: operation["date"], reverse=descending)
 
